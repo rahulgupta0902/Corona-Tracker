@@ -7,22 +7,16 @@ import styles from './Chart.module.css';
 
 const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
   const [dailyData, setDailyData] = useState({});
-  const [name,setName] = useState("Pallavee");
-
-  const handleName=(e)=>{
-
-    setName("dknkvldfn")
-  }
 
   useEffect(() => {
     const fetchMyAPI = async () => {
-      const initialDailyData = await fetchDailyData();   
+      const initialDailyData = await fetchDailyData();
 
       setDailyData(initialDailyData);
     };
 
     fetchMyAPI();
-  }, [name]);
+  }, []);
 
   const barChart = (
     confirmed ? (
@@ -32,7 +26,7 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
           datasets: [
             {
               label: 'People',
-              backgroundColor: ['rgba(0, 0, 225, 1)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
+              backgroundColor: ['rgba(0, 0, 255, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(255, 0, 0, 0.5)'],
               data: [confirmed.value, recovered.value, deaths.value],
             },
           ],
@@ -76,8 +70,6 @@ const Chart = ({ data: { confirmed, recovered, deaths }, country }) => {
 
   return (
     <div className={styles.container}>
-      <div>{name}</div>
-      <button onClick={handleName}>Click ME!</button>
       {country ? barChart : lineChart}
     </div>
   );
